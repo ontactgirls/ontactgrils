@@ -8,7 +8,7 @@ public class Application {
 		System.out.println("내일은 주말이야");
 		
 		System.out.println("5시넘었고 한시간뒤 퇴근이야");
-
+		System.out.println("쉬는시간");
 		
 		System.out.println("테스트");
 		System.out.println("테스트");

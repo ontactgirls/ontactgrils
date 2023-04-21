@@ -22,7 +22,7 @@ public class Application {
 		// TODO Auto-generated method stub
 		System.out.println("수정 후 push할때 원본(master)ㅇㄴㄹㅇㄴㄹ");
 
-	
+		System.out.println("수정 후 push할때 원본(ㄹㅇㄴㄹ");
 
 	}
 }

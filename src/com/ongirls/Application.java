@@ -6,9 +6,8 @@ public class Application {
 		// TODO Auto-generated method stub
 		System.out.println("테스트");
 		System.out.println("테스트");
-		System.out.println("테스트");
-		System.out.println("소스수ㄴㅇㄹㅇㄴㄹㄴㄹ정했습니다.");
-		System.out.println("최신.");
+
 		
+
 	}
 }

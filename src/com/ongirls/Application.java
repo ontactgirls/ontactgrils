@@ -7,15 +7,7 @@ public class Application {
 		System.out.println("테스트");
 		System.out.println("테스트");
 		System.out.println("테스트");
-		System.out.println("테스트");
-		System.out.println("테스트");
-		System.out.println("테스트");
-		System.out.println("테스트");
-		System.out.println("테스트");
-		System.out.println("테스트");
-		System.out.println("테스ㅇㄴㄹㄴㄹ트");
-		System.out.println("테스트");
-		System.out.println("테스트ㅇㅇ");
+		System.out.println("소스수정했습니다.");
 	}
 
 }

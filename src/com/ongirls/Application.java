@@ -3,7 +3,7 @@ package com.ongirls;
 public class Application {
 
 	public static void main(String[] args) {
-<<<<<<< HEAD
+
 
 		
 		System.out.println("내일은 주말이야");
@@ -18,11 +18,11 @@ public class Application {
 		System.out.println("소스수정했습니다.");
 		System.out.println("소스수정했습니다.");
 		System.out.println("강서연소스수정했습니다.");
-=======
+
 		// TODO Auto-generated method stub
 		System.out.println("수정 후 push할때 원본(master)ㅇㄴㄹㅇㄴㄹ");
-		
-		/*파일 하나를 두고 작업하면 충돌*/	
->>>>>>> refs/remotes/origin/hyerangg
+
+	
+
 	}
 }

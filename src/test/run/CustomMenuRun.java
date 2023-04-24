@@ -1,10 +1,10 @@
-package com.ongirls;
+package test.run;
 
-public class Time {
+public class CustomMenuRun {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println("kdjfksjfo");
+
 	}
 
 }

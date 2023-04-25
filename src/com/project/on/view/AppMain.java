@@ -9,7 +9,7 @@ public class AppMain {
 		System.out.println("\t\t\t\t   Project ON \t\t\t\t");
 		System.out.println("\t\t\t       디자인 생성을 시작합니다     \t\t\t\t\n");
 		System.out.println("\t\t\t░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\t\t\t");
-		callThread(1500);
+		callThread(1000);
 		System.out.println("\t\t\t░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\t\t\t");
 		System.out.println("\t\t\t░░░░░████████░░░░░░████████░░░░\t\t\t");
 		callThread(100);

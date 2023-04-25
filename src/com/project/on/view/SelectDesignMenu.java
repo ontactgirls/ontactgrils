@@ -12,16 +12,14 @@ import test.view.OrderMenu;
 import test.view.Test;
 
 public class SelectDesignMenu {
-	
-	private ProductOptDB pdOptDB = new ShirtOptDB();
+	ProductOptDB pdOptDB = new ShirtOptDB();
 	private Map< String, String[] > optMap = pdOptDB.getOptMap();
 	private Scanner sc = new Scanner(System.in);
 	
+	
 	public void selectDesignMenuView() {
-		
-		SelectDesignMenuManager sdmm = new SelectDesignMenuManager();
 		// manager의 추천디자인 생성 메서드를 호출하고 리턴 받은 값을 저장
-		int[][] randomDesigns = sdmm.randomDesigns(optMap);
+		int[][] randomDesigns = new SelectDesignMenuManager().randomDesigns(pdOptDB);
 		
 		int chkNum;
 		int menu;
@@ -76,11 +74,11 @@ public class SelectDesignMenu {
 			case 2:
 			case 3:
 				OrderMenu om = new OrderMenu(
-									new SelectDesignDTO(randomDesigns[menu-1], optMap));
-				om.OrderMenuView();
+									new SelectDesignDTO(randomDesigns[menu-1], pdOptDB));
+				om.orderMenuView();
 				break;
 			case 4:
-				new Test().method(new SelectDesignDTO(randomDesigns[menu-1], optMap));
+				new Test().method(new SelectDesignDTO(randomDesigns[menu-1], pdOptDB));
 			case 5:return;
 			//default는 while에서 menu 입력 값을 검증했기 때문에 생략함.
 		}

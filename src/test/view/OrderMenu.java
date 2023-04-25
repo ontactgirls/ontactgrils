@@ -16,7 +16,7 @@ public class OrderMenu {
 		this.stdDTO = stdDTO;
 	}
 	
-	public int OrderMenuView() {
+	public SelectDesignDTO orderMenuView() {
 		
 		int menu = 0;
 		while(true) {
@@ -50,6 +50,6 @@ public class OrderMenu {
 				System.out.println("수정하기 메서드 호출");
 				break;
 		}
-		return 0;
+		return stdDTO;
 	}
 }

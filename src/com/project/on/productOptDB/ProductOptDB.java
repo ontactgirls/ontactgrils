@@ -7,9 +7,13 @@ public abstract class ProductOptDB {
 //	순서가 유지되는 LinkedHashMap 사용함
 	protected Map< String, String[] > optMap = new LinkedHashMap<>();
 	
+	// 자식이 아닌 경우 객체 생성 못하도록 하기 위함.
+	protected ProductOptDB() {}
+	
 	public Map getOptMap() {
 		return optMap;
 	}
+	
 	
 	// 테스트를 위한 샘플 초이스 디자인 정보
 	public int[] getSampleDesign() {

@@ -2,15 +2,18 @@ package com.project.on.controller;
 
 import java.util.Map;
 
+import com.project.on.productOptDB.ProductOptDB;
+
 public class SelectDesignMenuManager {
 
 	/**
 	 * 중복되지 않은 랜덤 값으로 추천 디자인을 생성한다. 
 	 * @return int[][] 생성된 추천 디자인
 	 */
-	public int[][] randomDesigns(Map< String, String[] > optMap) {
+	public int[][] randomDesigns(ProductOptDB pdOptDB) {
+		Map< String, String[] > optMap = pdOptDB.getOptMap();
 		int optMapSize = optMap.size(); // 옵션 타이틀 개수 (ex : 카라, 주머니, 커프스 > 3개)
-		int designCnt=3; // 생성할 추천디자인 개수
+		int designCnt = 3; // 생성할 추천디자인 개수
 		// 생성된 추천 디자인 값을 담을 2차원 배열
 		int[][] randomDesigns = new int[designCnt][optMapSize];
 
@@ -37,7 +40,9 @@ public class SelectDesignMenuManager {
 				// key 값 = 옵션 타이틀 (ex : 카라, 주머니, 소매 등) 
 				String key = (String) optMap.keySet().toArray()[j];
 				
-				// 옵션 타이틀의 종류만큼 random() 생성 (ex : 카라 > 굴림, 사각, 육각 등)
+				// 옵션 타이틀의 종류만큼 random() 생성
+				// (ex : 옵션 타이틀 카라의 종류는 > 굴림, 사각, 육각 등)
+				// (ex : 옵션 타이틀 주머니의 종류는 > 왼쪽, 오른쪽 등)
 				randomDesigns[i][j] = (int)(java.lang.Math.random()
 										* optMap.get(key).length);
 				
@@ -47,7 +52,7 @@ public class SelectDesignMenuManager {
 			}
 			
 			// 생성된 추천 디자인을 중복체크 한다
-			for(int k = 0; k < i; k++) { // 현재 인덱스 i 와 앞의 인덱스들 k를 비교함.
+			for(int k = 0; k < i; k++) { // 현재 디자인 i 와 앞에 생성된 디자인들 k를 비교함.
 				chkNum = 0;
 				for(int j = 0; j < optMapSize; j++) { // 옵션 타이틀 개수 만큼 for
 					// if 옵션 타이틀의 종류 값이 같으면 chkNum 1 증가한다.
@@ -56,11 +61,7 @@ public class SelectDesignMenuManager {
 					}
 				}
 				
-				
-				
-				
 //				System.out.println("chkNum : " + chkNum);
-				
 				// 옵션 타이틀의 개수와 같다는건 모든 디자인이 중복되었다는 뜻이다.
 				if(chkNum == optMapSize) {
 //					System.out.println("중복입니다");
@@ -69,22 +70,6 @@ public class SelectDesignMenuManager {
 			}
 		}
 
-//		for(String key : optMap.keySet()) {
-//			System.out.println(optMap.get(key)[0]);
-//		}
-		
-//		String key = (String) optMap.keySet().toArray()[0];
-//		System.out.println("key 0 : " + key);
-//		key = (String) optMap.keySet().toArray()[1];
-//		System.out.println("key 1 : " + key);
-//		key = (String) optMap.keySet().toArray()[2];
-//		System.out.println("key 2 : " + key);
-		
-		
-//		for(int i = 0; i < optMapSize; i++) {
-//			String key = (String) optMap.keySet().toArray()[i];
-//			System.out.println(" : " + optMap.get(key)[randomDesign[][]]);
-//		}
 		return randomDesigns;
 	}
 }

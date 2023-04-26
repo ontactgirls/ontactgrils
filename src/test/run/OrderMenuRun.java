@@ -5,8 +5,7 @@ import java.util.Map;
 import com.project.on.dto.SelectDesignDTO;
 import com.project.on.productOptDB.ProductOptDB;
 import com.project.on.productOptDB.ShirtOptDB;
-
-import test.view.OrderMenu;
+import com.project.on.view.OrderMenu;
 
 // OrderMenu 테스트
 public class OrderMenuRun {

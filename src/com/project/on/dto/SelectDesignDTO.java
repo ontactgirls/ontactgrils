@@ -5,17 +5,28 @@ import java.util.Map;
 import com.project.on.productOptDB.ProductOptDB;
 
 public class SelectDesignDTO {
-	private int[] stdDTO;
+	private int[] confirmDesign;
 	private ProductOptDB pdOptDB;
 	
-	//기본생성자
-	//public SelectedDesignDTO() {}
 	
-	//매개변수 생성자
+	// public SelectDesignDTO() {}
+	
+	// 매개변수 생성자 : [[ 커스텀하기 ]]를 선택했을 때
+	// 커스텀 하기를 누르면 제품 객체 주소 값만 매개변수로 넘어온다.
+	// 디자인 정보가 없기 때문에 stdDTO는 null이다.
+	public SelectDesignDTO(ProductOptDB pdOptDB) {
+//		println으로 찍어보면 null 나옴
+//		System.out.println("this.stdDTO : " + this.stdDTO);
+		this.pdOptDB = pdOptDB;
+	}
+	
+
+	
+	//매개변수 생성자 : [[ 추천 디자인 ]] 선택했을 때
 	public SelectDesignDTO(int[] stdDTO, ProductOptDB pdOptDB) {
 		System.out.println("optMap : " + pdOptDB.toString());
 		System.out.println("optMap : " + pdOptDB.getClass());
-		this.stdDTO = stdDTO;
+		this.confirmDesign = stdDTO;
 		this.pdOptDB = pdOptDB;
 	}
 	
@@ -30,7 +41,7 @@ public class SelectDesignDTO {
 			}
 			String key = (String) optMap.keySet().toArray()[i];
 			System.out.print("\t" + key + " : \t");
-			System.out.print(optMap.get(key)[stdDTO[i]] + "\t");
+			System.out.print(optMap.get(key)[confirmDesign[i]] + "\t");
 		}
 		
 		return "";
@@ -38,12 +49,12 @@ public class SelectDesignDTO {
 
 	//getter setter
 	
-	public int[] getStdDTO() {
-		return stdDTO;
+	public int[] getConfirmDesign() {
+		return confirmDesign;
 	}
 
-	public void setStdDTO(int[] stdDTO) {
-		this.stdDTO = stdDTO;
+	public void setConfirmDesign(int[] confirmDesign) {
+		this.confirmDesign = confirmDesign;
 	}
 
 	public ProductOptDB getPdOptDB() {
@@ -53,5 +64,4 @@ public class SelectDesignDTO {
 	public void setPdOptDB(ProductOptDB pdOptDB) {
 		this.pdOptDB = pdOptDB;
 	}
-
 }

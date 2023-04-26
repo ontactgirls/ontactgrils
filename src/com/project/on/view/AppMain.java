@@ -34,17 +34,9 @@ public class AppMain {
 		System.out.println();
 
 		Scanner sc = new Scanner(System.in);
+		
 		int menu = 1;
-//		while(true) {
-//			System.out.println("\t\t\t\t 1. 관리자 \t\t\t\t");
-//			System.out.println("\t\t\t\t 2. 고객 \t\t\t\t");
-//			
-//			System.out.print("\n\t\t\t 메뉴를 선택해주세요 : ");
-//			menu = sc.nextInt();
-//			if(menu > 0 && menu <= 2) {
-//				break;
-//			}			
-//		}
+		
 		switch(menu) {
 			case 1: 
 			case 2: 

@@ -1,4 +1,4 @@
-package test.view;
+package com.project.on.view;
 
 import java.util.Scanner;
 
@@ -11,6 +11,7 @@ public class OrderMenu {
 
 	//기본생성자
 	public OrderMenu() {}
+	
 	//매개변수 생성자
 	public OrderMenu(SelectDesignDTO stdDTO) {
 		this.stdDTO = stdDTO;
@@ -48,6 +49,7 @@ public class OrderMenu {
 				break;
 			case 2:
 				System.out.println("수정하기 메서드 호출");
+				new CustomMenu(stdDTO).customMenuView();
 				break;
 		}
 		return stdDTO;

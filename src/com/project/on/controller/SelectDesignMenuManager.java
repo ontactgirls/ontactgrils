@@ -3,7 +3,7 @@ package com.project.on.controller;
 import java.util.Map;
 
 import com.project.on.dto.SelectDesignDTO;
-import com.project.on.productOptDB.ProductOptDB;
+import com.project.on.productDB.ProductOptDB_backup;
 import com.project.on.view.CustomMenu;
 import com.project.on.view.OrderMenu;
 
@@ -13,7 +13,7 @@ public class SelectDesignMenuManager {
 	 * 중복되지 않은 랜덤 값으로 추천 디자인을 생성한다. 
 	 * @return int[][] 생성된 추천 디자인
 	 */
-	public int[][] randomDesigns(ProductOptDB pdOptDB) {
+	public int[][] randomDesigns(ProductOptDB_backup pdOptDB) {
 		Map< String, String[] > optMap = pdOptDB.getOptMap();
 		int optMapSize = optMap.size(); // 옵션 타이틀 개수 (ex : 카라, 주머니, 커프스 > 3개)
 		int designCnt = 3; // 생성할 추천디자인 개수

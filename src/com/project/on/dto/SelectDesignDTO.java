@@ -2,11 +2,11 @@ package com.project.on.dto;
 
 import java.util.Map;
 
-import com.project.on.productOptDB.ProductOptDB;
+import com.project.on.productDB.ProductOptDB_backup;
 
 public class SelectDesignDTO {
 	private int[] confirmDesign;
-	private ProductOptDB pdOptDB;
+	private ProductOptDB_backup pdOptDB;
 	
 	
 	// public SelectDesignDTO() {}
@@ -14,7 +14,7 @@ public class SelectDesignDTO {
 	// 매개변수 생성자 : [[ 커스텀하기 ]]를 선택했을 때
 	// 커스텀 하기를 누르면 제품 객체 주소 값만 매개변수로 넘어온다.
 	// 디자인 정보가 없기 때문에 stdDTO는 null이다.
-	public SelectDesignDTO(ProductOptDB pdOptDB) {
+	public SelectDesignDTO(ProductOptDB_backup pdOptDB) {
 //		println으로 찍어보면 null 나옴
 //		System.out.println("this.stdDTO : " + this.stdDTO);
 		this.pdOptDB = pdOptDB;
@@ -23,7 +23,7 @@ public class SelectDesignDTO {
 
 	
 	//매개변수 생성자 : [[ 추천 디자인 ]] 선택했을 때
-	public SelectDesignDTO(int[] stdDTO, ProductOptDB pdOptDB) {
+	public SelectDesignDTO(int[] stdDTO, ProductOptDB_backup pdOptDB) {
 		System.out.println("optMap : " + pdOptDB.toString());
 		System.out.println("optMap : " + pdOptDB.getClass());
 		this.confirmDesign = stdDTO;
@@ -57,11 +57,11 @@ public class SelectDesignDTO {
 		this.confirmDesign = confirmDesign;
 	}
 
-	public ProductOptDB getPdOptDB() {
+	public ProductOptDB_backup getPdOptDB() {
 		return pdOptDB;
 	}
 
-	public void setPdOptDB(ProductOptDB pdOptDB) {
+	public void setPdOptDB(ProductOptDB_backup pdOptDB) {
 		this.pdOptDB = pdOptDB;
 	}
 }

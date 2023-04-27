@@ -71,5 +71,6 @@ public class CustomMenu {
 				break;
 			}
 		}
+		optMap.keySet().toArray();
 	}
 }

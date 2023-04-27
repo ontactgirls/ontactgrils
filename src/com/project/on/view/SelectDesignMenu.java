@@ -5,11 +5,11 @@ import java.util.Scanner;
 
 import com.project.on.controller.SelectDesignMenuManager;
 import com.project.on.dto.SelectDesignDTO;
-import com.project.on.productOptDB.ProductOptDB;
-import com.project.on.productOptDB.ShirtOptDB;
+import com.project.on.productDB.ProductOptDB_backup;
+import com.project.on.productDB.ShirtOptDB_backup;
 
 public class SelectDesignMenu {
-	ProductOptDB pdOptDB = new ShirtOptDB();
+	ProductOptDB_backup pdOptDB = new ShirtOptDB_backup();
 	private Map< String, String[] > optMap = pdOptDB.getOptMap();
 	private SelectDesignMenuManager sdManager = new SelectDesignMenuManager();
 	private SelectDesignDTO stdDTO;

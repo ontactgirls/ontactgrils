@@ -1,14 +1,14 @@
-package com.project.on.productOptDB;
+package com.project.on.productDB;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public abstract class ProductOptDB {
+public abstract class ProductOptDB_backup {
 //	순서가 유지되는 LinkedHashMap 사용함
 	protected Map< String, String[] > optMap = new LinkedHashMap<>();
 	
 	// 자식이 아닌 경우 객체 생성 못하도록 하기 위함.
-	protected ProductOptDB() {}
+	protected ProductOptDB_backup() {}
 	
 	public Map getOptMap() {
 		return optMap;

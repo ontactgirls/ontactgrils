@@ -1,10 +1,10 @@
-package com.project.on.productOptDB;
+package com.project.on.productDB;
 
 
-public class ShirtOptDB extends ProductOptDB {
+public class ShirtOptDB_backup extends ProductOptDB_backup {
 	
 	//생성자
-	public ShirtOptDB() {
+	public ShirtOptDB_backup() {
 		super();
 		super.optMap.put("카라", new String[] {"롱", "숏", "하프"});
 //		ArrayList<String> sarr = new ArrayList<>();

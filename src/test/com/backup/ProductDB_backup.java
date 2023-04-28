@@ -4,17 +4,17 @@
 //	옵션 종류 추가 및 수정이 가능할 것.
 //	중복 되지 않도록 할 것.
 
-package com.project.on.productDB;
+package test.com.backup;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class ProductDB {
+public class ProductDB_backup {
 	private Map<String, Map<String, Map<String, Integer>>> productMap = new LinkedHashMap<>();
 	private Map<String, Map<String, Integer>> titleMap;
 	private Map<String, Integer> designMap;
 	
-	public ProductDB() {
+	public ProductDB_backup() {
 	//	---- 데이터 구성 ------
 	//   product > title > design
 	//	 Map (셔츠 ,  List1)
@@ -56,7 +56,7 @@ public class ProductDB {
 	}
 	
 	public static void main(String[] args) {
-		ProductDB db = new ProductDB();
+		ProductDB_backup db = new ProductDB_backup();
 
 		System.out.println(db.getKeyArray()[0]);
 		System.out.println(db.getKeyArray(db.getKeyArray()[0])[0]);

@@ -1,6 +1,6 @@
-package test.run;
+package test.com.backup;
 
-import com.project.on.view.SelectDesignMenu;
+import com.on.project.view.SelectDesignMenu;
 
 public class SelectDesignMenuRun {
 

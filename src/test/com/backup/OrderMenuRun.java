@@ -1,11 +1,9 @@
-package test.run;
+package test.com.backup;
 
 import java.util.Map;
 
-import com.project.on.dto.SelectDesignDTO;
-import com.project.on.productDB.ProductOptDB_backup;
-import com.project.on.productDB.ShirtOptDB_backup;
-import com.project.on.view.OrderMenu;
+import com.on.project.dto.SelectDesignDTO;
+import com.on.project.view.OrderMenu;
 
 // OrderMenu 테스트
 public class OrderMenuRun {

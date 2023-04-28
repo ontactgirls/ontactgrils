@@ -1,12 +1,13 @@
-package com.project.on.view;
+package com.on.project.view;
 
 import java.util.Map;
 import java.util.Scanner;
 
-import com.project.on.controller.SelectDesignMenuManager;
-import com.project.on.dto.SelectDesignDTO;
-import com.project.on.productDB.ProductOptDB_backup;
-import com.project.on.productDB.ShirtOptDB_backup;
+import com.on.project.controller.SelectDesignMenuManager;
+import com.on.project.dto.SelectDesignDTO;
+
+import test.com.backup.ProductOptDB_backup;
+import test.com.backup.ShirtOptDB_backup;
 
 public class SelectDesignMenu {
 	ProductOptDB_backup pdOptDB = new ShirtOptDB_backup();

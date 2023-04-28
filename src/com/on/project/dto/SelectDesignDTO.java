@@ -1,8 +1,8 @@
-package com.project.on.dto;
+package com.on.project.dto;
 
 import java.util.Map;
 
-import com.project.on.productDB.ProductOptDB_backup;
+import test.com.backup.ProductOptDB_backup;
 
 public class SelectDesignDTO {
 	private int[] confirmDesign;

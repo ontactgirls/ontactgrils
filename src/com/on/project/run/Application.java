@@ -1,6 +1,6 @@
-package com.project.on.run;
+package com.on.project.run;
 
-import com.project.on.view.AppMain;
+import com.on.project.view.AppMain;
 
 public class Application {
 

@@ -1,8 +1,8 @@
-package com.project.on.view;
+package com.on.project.view;
 
 import java.util.Scanner;
 
-import com.project.on.dto.SelectDesignDTO;
+import com.on.project.dto.SelectDesignDTO;
 
 public class OrderMenu {
 	

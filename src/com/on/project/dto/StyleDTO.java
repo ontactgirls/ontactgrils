@@ -1,9 +1,10 @@
 package com.on.project.dto;
 
-public class OptionDesignDTO {
+public class StyleDTO {
 	
 	String name;
 	int price;
+	
 	public String getName() {
 		return name;
 	}
@@ -16,4 +17,11 @@ public class OptionDesignDTO {
 	public void setPrice(int price) {
 		this.price = price;
 	}
+	@Override
+	public String toString() {
+		return "(" + name + ", " + price + ")";
+//		return "StyleDTO [name=" + name + ", price=" + price + "]";
+	}
+	
+	
 }

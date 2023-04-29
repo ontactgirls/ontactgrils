@@ -2,94 +2,116 @@ package com.on.project.database;
 
 import java.util.ArrayList;
 
-import com.on.project.dto.OptionDesignDTO;
-import com.on.project.dto.OptionTitleDTO;
+import com.on.project.dto.OptionDTO;
 import com.on.project.dto.ProductDTO;
+import com.on.project.dto.StyleDTO;
+
 
 public class ProductDB {
 	
-	public ProductDB() {
+	private ArrayList<ProductDTO> productList = new ArrayList<>();
+
+	public ProductDB() { // 기본생성자 시작
 		
-		ArrayList<ProductDTO> productList = new ArrayList<>();
 		ProductDTO product;
-		OptionTitleDTO title;
-		OptionDesignDTO design;
+		OptionDTO option;
+		StyleDTO style;
 		
-		productList.add(new ProductDTO()); // [제품] 0 : 셔츠   1 : 바지   2 : 티셔츠
+		// [제품] 0 : 셔츠
+		productList.add(new ProductDTO());
 		product = productList.get(productList.size()-1); // new ProductDTO()의 인스턴스 주소값
 		product.setName("셔츠"); // ProductDTO()의 필드변수에 값을 할당한다.
-		product.setTitleList(new ArrayList<>());
 		
-			product.getTitleList().add(new OptionTitleDTO()); // [옵션 타이틀] 0 : 카라   1 : 소매  2: 주머니
-			title = product.getTitleList().get(product.getTitleList().size()-1); // new TitleDTO()의 인스턴스 주소값
-			title.setName("카라"); // TitleDTO()의 필드변수에 값을 할당한다.
-			title.setDesignList(new ArrayList<>());
+			// [옵션] 0 : 카라   1 : 소매  2: 주머니
+			product.getOptionList().add(new OptionDTO()); 
+			option = product.getOptionList().get(product.getOptionList().size()-1); // new OptionDTO()의 인스턴스 주소값
+			option.setName("카라"); // OptionDTO 의 필드에 값을 할당한다.
 			
-			
-				title.getDesignList().add(new OptionDesignDTO()); // [옵션 디자인] 0 : 숏카라  1 : 롱카라  2 : 하프카라 
-				design = title.getDesignList().get(title.getDesignList().size()-1); // new DesignDTO()의 인스턴스 주소값
-				design.setName("숏카라"); // DesignDTO()의 필드변수에 값을 할당한다.
-				design.setPrice(2000);
+				// [옵션의 스타일] 0 : 숏카라  1 : 롱카라  2 : 하프카라
+				option.getStyleList().add(new StyleDTO()); 
+				style = option.getStyleList().get(option.getStyleList().size()-1); // new StyleDTO()의 인스턴스 주소값
+				style.setName("숏카라"); // StyleDTO 의 필드에 값을 할당한다.
+				style.setPrice(2000);
 				
-				title.getDesignList().add(new OptionDesignDTO());
-				design = title.getDesignList().get(title.getDesignList().size()-1);
-				design.setName("롱카라");
-				design.setPrice(1500);
+				option.getStyleList().add(new StyleDTO());
+				style = option.getStyleList().get(option.getStyleList().size()-1);
+				style.setName("롱카라");
+				style.setPrice(1500);
 				
-				title.getDesignList().add(new OptionDesignDTO());
-				design = title.getDesignList().get(title.getDesignList().size()-1);
-				design.setName("하프카라");
-				design.setPrice(1000);
+				option.getStyleList().add(new StyleDTO());
+				style = option.getStyleList().get(option.getStyleList().size()-1);
+				style.setName("하프카라");
+				style.setPrice(1000);
 				
-			product.getTitleList().add(new OptionTitleDTO());
-			title = product.getTitleList().get(product.getTitleList().size()-1);
-			title.setName("주머니");
-			title.setDesignList(new ArrayList<>());
+			// [옵션] 0 : 카라   1 : 소매  2: 주머니
+			product.getOptionList().add(new OptionDTO());
+			option = product.getOptionList().get(product.getOptionList().size()-1); // new OptionDTO()의 인스턴스 주소값
+			option.setName("주머니"); // OptionDTO 의 필드에 값을 할당한다.
+				// [옵션의 스타일] 0 : 숏카라  1 : 롱카라  2 : 하프카라
+				option.getStyleList().add(new StyleDTO()); 
+				style = option.getStyleList().get(option.getStyleList().size()-1); // new StyleDTO()의 인스턴스 주소값
+				style.setName("왼쪽"); // StyleDTO 의 필드에 값을 할당한다.
+				style.setPrice(1000);
 				
-				title.getDesignList().add(new OptionDesignDTO());
-				design = title.getDesignList().get(title.getDesignList().size()-1);
-				design.setName("왼쪽");
-				design.setPrice(1000);
+				option.getStyleList().add(new StyleDTO()); 
+				style = option.getStyleList().get(option.getStyleList().size()-1);
+				style.setName("오른쪽");
+				style.setPrice(500);
 				
-				title.getDesignList().add(new OptionDesignDTO());
-				design = title.getDesignList().get(title.getDesignList().size()-1);
-				design.setName("오른쪽");
-				design.setPrice(500);
-				
-		
+		// [제품] 1 : 바지
 		productList.add(new ProductDTO());
-		product = productList.get(productList.size()-1);
-		product.setName("바지");
-		product.setTitleList(new ArrayList<>());
+		product = productList.get(productList.size()-1); // new ProductDTO()의 인스턴스 주소값
+		product.setName("바지"); // ProductDTO()의 필드변수에 값을 할당한다.
 		
-			product.getTitleList().add(new OptionTitleDTO());
-			title = product.getTitleList().get(product.getTitleList().size()-1);
-			title.setName("밑단");
-			title.setDesignList(new ArrayList<>());
+			// [옵션] 0 : 넓이
+			product.getOptionList().add(new OptionDTO()); 
+			option = product.getOptionList().get(product.getOptionList().size()-1); // new OptionDTO()의 인스턴스 주소값
+			option.setName("넓이"); // OptionDTO 의 필드에 값을 할당한다.
+			
+				// [옵션의 스타일] 0 : 넓게  1 : 좁게
+				option.getStyleList().add(new StyleDTO()); 
+				style = option.getStyleList().get(option.getStyleList().size()-1); // new StyleDTO()의 인스턴스 주소값
+				style.setName("보통"); // StyleDTO 의 필드에 값을 할당한다.
+				style.setPrice(1500);
 				
-				title.getDesignList().add(new OptionDesignDTO());
-				design = title.getDesignList().get(title.getDesignList().size()-1);
-				design.setName("넓게");
-				design.setPrice(1000);
+				option.getStyleList().add(new StyleDTO());
+				style = option.getStyleList().get(option.getStyleList().size()-1);
+				style.setName("슬림");
+				style.setPrice(2000);
 				
-				title.getDesignList().add(new OptionDesignDTO());
-				design = title.getDesignList().get(title.getDesignList().size()-1);
-				design.setName("좁게");
-				design.setPrice(1500);
+				option.getStyleList().add(new StyleDTO());
+				style = option.getStyleList().get(option.getStyleList().size()-1);
+				style.setName("와이드");
+				style.setPrice(2500);
+			// [옵션] 1 : 밑단
+			product.getOptionList().add(new OptionDTO()); 
+			option = product.getOptionList().get(product.getOptionList().size()-1); // new OptionDTO()의 인스턴스 주소값
+			option.setName("길이"); // OptionDTO 의 필드에 값을 할당한다.
+			
+				// [옵션의 스타일] 0 : 넓게  1 : 좁게
+				option.getStyleList().add(new StyleDTO()); 
+				style = option.getStyleList().get(option.getStyleList().size()-1); // new StyleDTO()의 인스턴스 주소값
+				style.setName("반바지"); // StyleDTO 의 필드에 값을 할당한다.
+				style.setPrice(3000);
+				
+				option.getStyleList().add(new StyleDTO());
+				style = option.getStyleList().get(option.getStyleList().size()-1);
+				style.setName("긴바지");
+				style.setPrice(4000);
+				
 				
 
-		// 사용자에게 입력받아서 특정한 값에 접근하다고 가정
+		// 사용자에게 입력받아서 특정한 값에 접근하다고 가정하고 테스트
 		int productID = 1;
 		int titleID = 0;
 		int designID = 0;
 		
-		System.out.println("productList.get(productID)" + productList.get(productID));
+//		System.out.println("productList.get(productID)" + productList.get(productID));
+//		System.out.println(productList.get(productID).getTitleList().get(titleID).getDesignList().get(designID).getName());
+//		System.out.println(productList.get(productID).getTitleList().get(titleID).getDesignList().get(designID).getPrice());
 		
-		System.out.println(productList.get(productID).getTitleList().get(titleID).getDesignList().get(designID).getName());
-		System.out.println(productList.get(productID).getTitleList().get(titleID).getDesignList().get(designID).getPrice());
 		
-		
-//		// 사용자에게 입력받아서 특정한 값을 추가한다고 가정
+//		// 사용자에게 입력받아서 특정한 값을 추가한다고 가정하고 테스트
 //		
 //		productID = 0;
 //		titleID = 0;
@@ -106,5 +128,12 @@ public class ProductDB {
 //		
 //		System.out.println(productList.get(productID).getTitleList().get(titleID).getDesignList().get(designID).getName());
 //		System.out.println(productList.get(productID).getTitleList().get(titleID).getDesignList().get(designID).getPrice());
+
+	} // 기본생성자 끝
+
+	
+	// getter / setter
+	public ArrayList<ProductDTO> getProductList() {
+		return productList;
 	}
 }

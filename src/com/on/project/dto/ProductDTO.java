@@ -25,7 +25,7 @@ public class ProductDTO {
 			System.out.print(o.getName() + " : ");
 			
 			for(StyleDTO s : o.getStyleList()) {
-				System.out.print(s.getName());
+				System.out.print(s.getName() + "\t");
 			}
 			
 			i++;

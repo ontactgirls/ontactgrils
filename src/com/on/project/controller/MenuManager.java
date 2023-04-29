@@ -1,4 +1,4 @@
-package test;
+package com.on.project.controller;
 
 import java.util.ArrayList;
 
@@ -6,21 +6,21 @@ import com.on.project.dto.OptionDTO;
 import com.on.project.dto.ProductDTO;
 import com.on.project.dto.StyleDTO;
 
-public class TestManager {
+public class MenuManager {
 	
-	public ArrayList<ProductDTO> randomDesignProductList(ProductDTO product) {
-		System.out.println(product.getName());
+	public ArrayList<ProductDTO> randomDesignProductList(ProductDTO productData) {
+		System.out.println(productData.getName());
 		
 		
-		TestManager tm = new TestManager();
+		MenuManager tm = new MenuManager();
 		int createNum = 3; // 추천디자인 생성 개수
-		int optionListSize = product.getOptionList().size();
+		int optionListSize = productData.getOptionList().size();
 		
 		// 생성된 추천 디자인을 담을 리스트
 		ArrayList<ProductDTO> randomDesignProductList = new ArrayList<>();
 		// 추천 디자인을 담기 위한 틀 생성
 		while(true) {
-			ProductDTO productStructure = tm.getProductStructure(product);
+			ProductDTO productStructure = tm.getProductStructure(productData);
 			randomDesignProductList.add(productStructure);
 			
 			if(randomDesignProductList.size() == createNum) {
@@ -45,7 +45,7 @@ public class TestManager {
 				// 옵션의 스타일 종류만큼 random() 생성
 				// (ex : 카라 옵션의 스타일 종류는 > 숏카라, 롱카라)
 				// (ex : 주머니 옵션의 스타일 종류는 > 왼쪽, 오른쪽, 없음)
-				OptionDTO option = product.getOptionList().get(j);
+				OptionDTO option = productData.getOptionList().get(j);
 				randomNum = (int)(java.lang.Math.random()
 									* option.getStyleList().size());
 				
@@ -108,7 +108,7 @@ public class TestManager {
 	
 	
 	
-	public ProductDTO getProductStructure(ProductDTO product) {
+	public ProductDTO getProductStructure(ProductDTO productData) {
 		
 //		style의 값은 제외하고 아래의 구조로 틀만 만들어진다.
 //		style의 값은 랜덤, 또는 사용자가 선택한 값으로 할당되고 수정될 값이다.
@@ -119,11 +119,11 @@ public class TestManager {
 //					[styleName = null, stylePrice = 0]]
 		
 		ProductDTO p = new ProductDTO();
-		p.setName(product.getName());
+		p.setName(productData.getName());
 		
 		// 옵션의 개수 (ex : 카라, 주머니, 소매) 만큼 반복
-		for(int i = 0; i < product.getOptionList().size(); i++) {
-			String optionName = product.getOptionList().get(i).getName();
+		for(int i = 0; i < productData.getOptionList().size(); i++) {
+			String optionName = productData.getOptionList().get(i).getName();
 			p.getOptionList().add(new OptionDTO());
 			p.getOptionList().get(i).setName(optionName);
 			p.getOptionList().get(i).getStyleList().add(new StyleDTO());

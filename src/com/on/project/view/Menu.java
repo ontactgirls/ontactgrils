@@ -18,12 +18,25 @@ public class Menu {
 	String errMsg = "잘못된 입력입니다.";
 	
 	public void mainMenu() {
+		
+		System.out.println(
+			  "\t ####### #     #    ######  ######  #######       # #######  #####  #######\n" 
+			+ "\t #     # ##    #    #     # #     # #     #       # #       #     #    #\n"    
+			+ "\t #     # # #   #    #     # #     # #     #       # #       #          #\n"    
+			+ "\t #     # #  #  #    ######  ######  #     #       # #####   #          #\n"    
+			+ "\t #     # #   # #    #       #   #   #     # #     # #       #          #\n"    
+			+ "\t #     # #    ##    #       #    #  #     # #     # #       #     #    #\n"    
+			+ "\t ####### #     #    #       #     # #######  #####  #######  #####     #\n"
+		);
+
+		
+		
 		while(true) {
 			String[] texts = 
 				{
-						"1. 관리자메뉴"
-				      , "2. 맞춤제작하기"
-					  , "3. 프로그램 종료"
+						"\t\t1. 관리자메뉴"
+				      , "\t\t2. 맞춤제작하기"
+					  , "\t\t3. 프로그램 종료"
 				};
 			int click = 0;
 			
@@ -32,9 +45,9 @@ public class Menu {
 					System.out.println(text);
 				}
 	
-				System.out.print("메뉴를 선택하세요 : ");
+				System.out.print("\n\t\t메뉴를 선택하세요 : ");
 				click = sc.nextInt();
-				
+				sc.nextLine();
 				// 메뉴의 입력이 정상 범주다.
 				if (click > 0 && click <= texts.length) {
 					break;
@@ -42,8 +55,7 @@ public class Menu {
 					System.out.println(errMsg);
 				}
 			}
-			
-			
+			System.out.println();
 			switch(click) {
 				case 1:
 					adminMenu();
@@ -74,27 +86,28 @@ public class Menu {
 		while(true) {
 
 			for(String text : texts) {
-				System.out.println(text);
+				System.out.println("\t\t" + text);
 			}
 			
-			System.out.print("메뉴를 선택하세요 : ");
+			System.out.print("\n\t\t메뉴를 선택하세요 : ");
 			click = sc.nextInt();
-			
+			sc.nextLine();
+			System.out.println();
 			if(click > 0 && click <= texts.length) {
 				break;
 			} else {
 				System.out.println(errMsg);
 			}
 		}
-		sc.nextLine();
 		
 		OptionDTO optionData;
 		switch(click) {
 			case 1: // 주문현황
-				if (mm.getOrderList() == null) {
-					System.out.println("주문 목록이 없습니다.");					
+				
+				if (mm.getOrderList().size() == 0) {
+					System.out.println("\t\t주문 목록이 없습니다.\n");					
 				} else {
-					System.out.println("--------------------------------------------------------------");
+					System.out.println("\t\t--------------------------------------------------------------");
 					for(OrderDTO order : mm.getOrderList()) {
 						order.toString();
 					}
@@ -106,27 +119,36 @@ public class Menu {
 				break;
 			case 3: // 제품추가
 				addProductInput();
+				System.out.println();
 				break;
 			case 4: // 옵션추가
 				addOptionInput(mm.getDB().getProductList().get(clickProduct()));
+				System.out.println();
 				break;
 			case 5: // 스타일추가
 				mm.setProductData(mm.getDB().getProductList().get(clickProduct()));
 				optionData = mm.getProductData().getOptionList().get(clickOption()); 
 				addStyleInput(optionData);
+				System.out.println();
 				break;
 			case 6: // 제품삭제
 				mm.deleteInDB(clickProduct());
+				System.out.println("\t\t제품이 삭제되었습니다.");
+				System.out.println();
 				break;
 			case 7: // 옵션삭제
 				
 				mm.setProductData(mm.getDB().getProductList().get(clickProduct()));
 				mm.deleteInDB(mm.getProductData(), clickOption());
+				System.out.println("\t\t옵션이 삭제되었습니다.");
+				System.out.println();
 				break;
 			case 8: // 스타일삭제
 				mm.setProductData(mm.getDB().getProductList().get(clickProduct()));
 				optionData = mm.getProductData().getOptionList().get(clickOption());
 				mm.deleteInDB(optionData, clickStyle(optionData));
+				System.out.println("\t\t스타일이 삭제되었습니다.");
+				System.out.println();
 				break;
 		} // switch
 		
@@ -137,13 +159,13 @@ public class Menu {
 		while(true) { 
 			String name = "";
 			while(name.equals("")) {
-				System.out.print("제품이름을 입력하세요 : ");
+				System.out.print("\t\t제품이름을 입력하세요 : ");
 				name = sc.nextLine();
 			}
 	
 			ProductDTO np = mm.addInDB(name);
 			if(np == null) {
-				System.out.println("중복된 제품입니다.");
+				System.out.println("\t\t중복된 제품입니다.");
 			} else {
 				addOptionInput(np);
 				break;
@@ -160,21 +182,21 @@ public class Menu {
 			while(true) {
 				String name = "";
 				while(name.equals("")) {
-					System.out.print("옵션이름을 입력하세요 : ");
+					System.out.print("\t\t옵션이름을 입력하세요 : ");
 					name = sc.nextLine();
 				}
 	
 				OptionDTO no = mm.addInDB(p, name);
 				
 				if(no == null) {
-					System.out.println("중복된 옵션입니다.");
+					System.out.println("\t\t중복된 옵션입니다.");
 				} else {
 					addStyleInput(no);
 					break;
 				}
 			}
 
-			System.out.print("0. 종료하기 / 1. 옵션 계속 추가 : ");
+			System.out.print("\t\t0. 종료하기 / 1. 옵션 계속 추가 : ");
 			click = sc.nextInt();
 			sc.nextLine();
 		}
@@ -191,12 +213,12 @@ public class Menu {
 				String name = "";
 				int price = 0;
 				while(name.equals("")) {
-					System.out.print("스타일 이름 : ");
+					System.out.print("\t\t스타일 이름 : ");
 					name = sc.nextLine();
 				}
 				
 				while(price < 1) {
-					System.out.print("스타일 가격 : ");
+					System.out.print("\t\t스타일 가격 : ");
 					price = sc.nextInt();
 					sc.nextLine();
 				}
@@ -204,46 +226,86 @@ public class Menu {
 				StyleDTO ns = mm.addInDB(o, name, price);
 				
 				if(ns == null) {
-					System.out.println("중복된 스타일입니다.");
+					System.out.println("\t\t중복된 스타일입니다.");
 				} else {
 					break;
 				}
 			}
 			
-			System.out.print("0. 종료하기 / 1. 스타일 계속 추가 : ");
+			System.out.print("\t\t0. 종료하기 / 1. 스타일 계속 추가 : ");
 			click = sc.nextInt();
 			sc.nextLine();
 		}
 	}
 	
 	private void clientMenu() {
+		System.out.println();
+		System.out.println("\t\t░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░");
+		System.out.println("\t\t░░░░░░░░████████████████░░░░░░░░");
+		System.out.println("\t\t░░░░░░░░██░░░░░░░░░░░░██░░░░░░░░");
+		System.out.println("\t\t░░░░░░░░██░░██░░░░██░░██░░░░░░░░");
+		System.out.println("\t\t░░░░░░░░██░░░░░░░░░░░░██░░░░░░░░");
+		System.out.println("\t\t░░░░░░░░██░░░░████░░░░██░░░░░░░░");
+		System.out.println("\t\t░░░░██████░░░░░░░░░░░░██████░░░░");
+		System.out.println("\t\t░░░░██░░████████████████░░██░░░░");
+		System.out.println("\t\t░░░░██░░██░░░░░░░░░░░░██░░██░░░░");
+		System.out.println("\t\t░░░░██░░████████████████░░██░░░░");
+		System.out.println("\t\t░░░░██░░░░░░██░░░░██░░░░░░██░░░░");
+		System.out.println("\t\t░░░░░░░░░░░░██░░░░██░░░░░░░░░░░░");
+		System.out.println("\t\t░░░░░░░░░░░░██░░░░██░░░░░░░░░░░░");
+		System.out.println("\t\t░░░░░░░░░░░░████░░████░░░░░░░░░░");
+		System.out.println("\t\t░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░");
+		System.out.println();
+
 
 		int click = clickProduct();
-
-		mm.setProductData(mm.getDB().getProductList().get(click));
 		
+		mm.setProductData(mm.getDB().getProductList().get(click));
 		designSelectMenu();
 
 	} // clientMenu()
 	
 	
 	private void designSelectMenu() {
+		System.out.println("\t\t===================================\t\t\n");
+		System.out.println("\t\t  " + mm.getProductData().getName()
+									+ " 제품의 디자인 생성을 시작합니다     \t\t\n");
+		System.out.println("\t\t===================================\t\t");
+		callThread(1000);
+		System.out.println("\t\t   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░\t");
+		System.out.println("\t\t   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░\t");
+		callThread(500);
+		System.out.println("\t\t   ░░░░░░░░░██░░░░░░██░░░░░░░░░\t");
+		System.out.println("\t\t   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░\t");
+		callThread(500);
+		System.out.println("\t\t   ░░░░░██░░░░░░░░░░░░░░██░░░░░\t");
+		System.out.println("\t\t   ░░░░░░░██░░░░░░░░░░██░░░░░░░\t");
+		System.out.println("\t\t   ░░░░░░░░░██████████░░░░░░░░░\t");
+		callThread(500);
+		System.out.println("\t\t   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░\t");
+		System.out.println("\t\t   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░\t");
+		callThread(500);
 		
 		int click = 0;
 		ArrayList<ProductDTO> productList = mm.randomDesignProductList();
-		
+		System.out.println("\n");
+		System.out.println("\t\t□□□□□□□□□□□□   " + mm.getProductData().getName() + " 맞춤 제작   □□□□□□□□□□□□ ");
+		System.out.println("");
 		while(true) {
 			int seq = 0;
 			for(ProductDTO p : productList) {
-				
-				System.out.println("\t" + ++seq + ". 추천디자인 선택하기");
-				System.out.print("\t\t");
+				System.out.println("\t\t" + ++seq + ". 추천디자인 선택하기");
+				System.out.print("\t\t\t");
 				mm.printDesign(p.getOptionList());
+				System.out.println("");
 			}
-			System.out.println("\t" + ++seq + ". ALL 커스텀 선택하기");
+			System.out.println("\t\t" + ++seq + ". ALL 커스텀 선택하기");
 
-			System.out.print("\n------------- 메뉴를 선택해주세요 : ");
+			System.out.print("\n\t\t메뉴를 선택해주세요 : ");
 			click = sc.nextInt();
+			sc.nextLine();
+			System.out.println();
+			
 			
 			if (click > 0 && click <= seq) {
 				break;
@@ -280,19 +342,20 @@ public class Menu {
 		while(true) {
 			click = 0;
 			int seq = 0;
-			System.out.println("아래 디자인으로 (" + product.getName() + ") 제품을 주문하시겠습니까?");
-			System.out.print("\t");
+			System.out.println("\n\t\t아래 디자인으로 (" + product.getName() + ") 제품을 주문하시겠습니까?");
+			System.out.print("\n\t\t");
 			mm.printDesign(product.getOptionList());
 			
-			System.out.println("\t제품의 가격은 " + sum + "원 입니다.");
+			System.out.println("\t\t제품의 가격은 " + sum + "원 입니다.\n");
 			
-			System.out.println("\t" + ++seq + ". 주문하기");
-			System.out.println("\t" + ++seq + ". 디자인 수정 하기");
-			System.out.println("\t" + ++seq + ". 주문취소");
+			System.out.println("\t\t" + ++seq + ". 주문하기");
+			System.out.println("\t\t" + ++seq + ". 디자인 수정 하기");
+			System.out.println("\t\t" + ++seq + ". 주문취소");
 			
-			System.out.print("메뉴를 선택해주세요 : ");
+			System.out.print("\n\t\t메뉴를 선택해주세요 : ");
 			click = sc.nextInt();
-			
+			sc.nextLine();
+			System.out.println();
 			if(click > 0 && click <= seq) {
 				break;
 			} else {
@@ -302,17 +365,44 @@ public class Menu {
 		
 		switch(click) {
 			case 1:
+
 				Calendar cal = Calendar.getInstance();
 				OrderDTO orderInfo = orderInput();
 				orderInfo.setProduct(product);
 				orderInfo.setSum(sum);
 				orderInfo.setOrderDate(new SimpleDateFormat("yyyy-MM-dd").format(cal.getTime()));
 				mm.addOrderList(orderInfo);
+				
+				System.out.println();
+				System.out.println("\t ####### #     #    #    #     # #    #    #     # ####### #     # ");
+				System.out.println("\t    #    #     #   # #   ##    # #   #      #   #  #     # #     # ");
+				System.out.println("\t    #    #     #  #   #  # #   # #  #        # #   #     # #     # ");
+				System.out.println("\t    #    ####### #     # #  #  # ###          #    #     # #     # ");
+				System.out.println("\t    #    #     # ####### #   # # #  #         #    #     # #     # ");
+				System.out.println("\t    #    #     # #     # #    ## #   #        #    #     # #     # ");
+				System.out.println("\t    #    #     # #     # #     # #    #       #    #######  #####  ");
+				
+				
+//				System.out.println("\t\t░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\t\t");
+//				System.out.println("\t\t░░░░░░░░░████░░░░░░████░░░░░░░░\t\t");
+//				System.out.println("\t\t░░░░░░░████████░░████████░░░░░░\t\t");
+//				System.out.println("\t\t░░░░░██████████████████████░░░░\t\t");
+//				System.out.println("\t\t░░░░░██████░░██████░░██████░░░░\t\t");
+//				System.out.println("\t\t░░░░░██████████████████████░░░░\t\t");
+//				System.out.println("\t\t░░░░░░░████░░██████░░████░░░░░░\t\t");
+//				System.out.println("\t\t░░░░░░░░░████░░░░░░████░░░░░░░░\t\t");
+//				System.out.println("\t\t░░░░░░░░░░░██████████░░░░░░░░░░\t\t");
+//				System.out.println("\t\t░░░░░░░░░░░░░██████░░░░░░░░░░░░\t\t");
+//				System.out.println("\t\t░░░░░░░░░░░░░░░██░░░░░░░░░░░░░░\t\t");
+//				System.out.println("\t\t░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\t\t");
+//				System.out.println("\t\t░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\t\t");
+				
+				
 				cal.add(cal.DATE, 7);
-				System.out.print("주문하신 제품은 ");
+				System.out.print("\n\t\t주문하신 제품은 ");
 				System.out.print(new SimpleDateFormat("yyyy-MM-dd").format(cal.getTime()));
 				System.out.println(" 에 배송될 예정입니다.");
-				System.out.println("주문해주셔서 감사합니다.");
+				System.out.println("\t\t주문해주셔서 감사합니다.\n");
 				break;
 			case 2:
 				customOptionMenu(product);
@@ -330,29 +420,28 @@ public class Menu {
 		
 		while(click != 1) {
 			click = 0;
-			sc.nextLine(); // 버퍼 비움
 			input.put("이름", "");
 			input.put("핸드폰 번호", "");
 			input.put("배송받을 주소", "");
 			
-			System.out.println("배송 정보를 입력해주세요.");
+			System.out.println("\n\t\t배송 정보를 입력해주세요.");
 			
 			for(String key : input.keySet()) {
 				while(input.get(key).equals("")) {
-					System.out.print(key + " : ");
+					System.out.print("\t\t" + key + " : ");
 					input.put(key, sc.nextLine());
 				}
 			}
 			
-			System.out.println("입력하신 정보를 확인해주세요.");
+			System.out.println("\n\t\t입력하신 정보를 확인해주세요.");
 			for(String key : input.keySet()) {
-				System.out.println(key + " : " + input.get(key));
+				System.out.println("\t\t" + key + " : " + input.get(key));
 			}
 			
 			while(click < 1 || click > 2) {
-				System.out.println("1. 주문하기 / 2. 배송정보 수정하기");
-				System.out.print("메뉴를 선택하세요 : ");
+				System.out.print("\n\t\t1. 주문하기 / 2. 배송정보 수정하기 : ");
 				click = sc.nextInt();
+				sc.nextLine();
 			}
 		}
 		
@@ -368,8 +457,8 @@ public class Menu {
 			product = mm.getProductStructure();
 //			System.out.println(product);
 			
-			System.out.println(product.getName() + " 제품 커스텀 하기");
-			
+			System.out.println("\t\t" + product.getName() + " 제품 커스텀 하기");
+			System.out.println();
 			for(int i = 0; i < product.getOptionList().size(); i++) {
 				customStyleMenu(product, i);
 			}
@@ -378,15 +467,15 @@ public class Menu {
 		} else {
 			int click = 1;
 			while(click == 1) {
-				System.out.println(product.getName() + " 제품의 디자인 정보");
-				System.out.print("\t");
+				System.out.println("\t\t" + product.getName() + " 제품의 디자인 정보");
+				System.out.print("\t\t");
 				mm.printDesign(product.getOptionList());
-				
-				System.out.println("옵션 리스트");
+				System.out.println();
+				System.out.println("\t\t옵션 리스트");
 				customStyleMenu(product, clickOption());
-				System.out.println("수정되었습니다.");
+				System.out.println("\t\t수정되었습니다.");
 				
-				System.out.print("0. 수정 종료 / 1. 수정 계속 : ");
+				System.out.print("\n\t\t0. 수정 종료 / 1. 수정 계속 : ");
 				click = sc.nextInt();
 				sc.nextLine();
 			}
@@ -399,8 +488,9 @@ public class Menu {
 	private void customStyleMenu(ProductDTO product, int optionId) {
 		
 		OptionDTO optionData = mm.getProductData().getOptionList().get(optionId);
-		System.out.println(optionData.getName() + " 옵션의 스타일 리스트");
+		System.out.println("\t\t" + optionData.getName() + " 옵션의 스타일 리스트");
 		mm.modifyStyle(product, optionId, clickStyle(optionData));
+		System.out.println();
 	}
 	
 	private int clickProduct() {
@@ -409,10 +499,10 @@ public class Menu {
 			click = 0;
 			int seq = 0;
 			for(ProductDTO p : mm.getDB().getProductList()) {
-				System.out.println(++seq + ". " + p.getName());
+				System.out.println("\t\t" + ++seq + ". " + p.getName());
 			}
 			
-			System.out.print("제품을 선택해주세요 : ");
+			System.out.print("\n\t\t제품을 선택해주세요 : ");
 			click = sc.nextInt();
 			sc.nextLine();
 			
@@ -432,10 +522,10 @@ public class Menu {
 			click = 0;
 			int seq = 0;
 			for(OptionDTO o : mm.getProductData().getOptionList()) {
-				System.out.println("\t" + ++seq + ". " + o.getName());
+				System.out.println("\t\t" + ++seq + ". " + o.getName());
 			}
 	
-			System.out.print("옵션을 선택하세요 : ");
+			System.out.print("\n\t\t옵션을 선택하세요 : ");
 			click = sc.nextInt();
 			sc.nextLine();
 			
@@ -455,9 +545,9 @@ public class Menu {
 			click = 0;
 			int seq = 0;
 			for(StyleDTO s : optionData.getStyleList()) {
-				System.out.println("\t" + ++seq + ". " + s.getName());
+				System.out.println("\t\t" + ++seq + ". " + s.getName());
 			}
-			System.out.print("스타일을 선택하세요 : ");
+			System.out.print("\n\t\t스타일을 선택하세요 : ");
 			click = sc.nextInt();
 			sc.nextLine();
 			if(click > 0 && click <= seq) {
@@ -467,5 +557,13 @@ public class Menu {
 			}
 		}
 		return click-1;
+	}
+	
+	public static void callThread(int time) {
+		try {
+			Thread.sleep(time);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 }

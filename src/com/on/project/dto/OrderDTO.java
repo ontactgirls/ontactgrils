@@ -22,12 +22,12 @@ public class OrderDTO {
 	
 	@Override
 	public String toString() {
-		System.out.println("이름 : " + name + ", 핸드폰 : " + phone + ", 주문일자 : " + orderDate);
-		System.out.println("제품명 : " + product.getName() + ", 제품가격 : " + sum);
-		System.out.println("배송주소 : " + address); 
-		System.out.println("\t[" + product.getName() + " 디자인 정보 ] ");
-		System.out.println(product);
-		System.out.println("--------------------------------------------------------------");
+		System.out.println("\t\t이름 : " + name + ", 핸드폰 : " + phone + ", 주문일자 : " + orderDate);
+		System.out.println("\t\t제품명 : " + product.getName() + ", 제품가격 : " + sum);
+		System.out.println("\t\t배송주소 : " + address); 
+		System.out.println("\t\t[" + product.getName() + " 디자인 정보 ] ");
+		System.out.println("\t\t" + product);
+		System.out.println("\t\t--------------------------------------------------------------");
 		return "";
 	}
 

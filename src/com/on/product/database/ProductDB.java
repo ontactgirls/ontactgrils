@@ -64,10 +64,10 @@ public class ProductDB {
 		product = productList.get(productList.size()-1); // new ProductDTO()의 인스턴스 주소값
 		product.setName("바지"); // ProductDTO()의 필드변수에 값을 할당한다.
 		
-			// [옵션] 0 : 넓이
+			// [옵션] 0 : 너비
 			product.getOptionList().add(new OptionDTO()); 
 			option = product.getOptionList().get(product.getOptionList().size()-1); // new OptionDTO()의 인스턴스 주소값
-			option.setName("넓이"); // OptionDTO 의 필드에 값을 할당한다.
+			option.setName("너비"); // OptionDTO 의 필드에 값을 할당한다.
 			
 				// [옵션의 스타일] 0 : 넓게  1 : 좁게
 				option.getStyleList().add(new StyleDTO()); 
@@ -179,25 +179,24 @@ public class ProductDB {
 	
 	@Override
 	public String toString() {
-		
+		System.out.println("\t------------------------------------------------");
 		for(ProductDTO p : productList) {
-			System.out.println("제품 : " + p.getName());
+			System.out.println("\t제품 : " + p.getName());
 			
 			for(OptionDTO o : p.getOptionList()) {
-				System.out.println("  ㄴ " + o.getName());
-				System.out.print("      ㄴ ");
+				System.out.println("\t  ㄴ " + o.getName());
+				System.out.print("\t      ㄴ ");
 				
 				for(StyleDTO s : o.getStyleList()) {
 					System.out.print(s.getName() + " : " + s.getPrice() + "원\t");
 				}
 				System.out.println();
 			}
+			System.out.println("\t------------------------------------------------");
 		}
 
 		return "";
 	}
-
-
 
 
 	// getter / setter

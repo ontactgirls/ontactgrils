@@ -23,7 +23,7 @@ public class ProductDTO {
 
 		int i = 0;
 		for(OptionDTO o : optionList) {
-			System.out.print("\t" + o.getName() + " : ");
+			System.out.print("\t\t" + o.getName() + " : ");
 			
 			for(StyleDTO s : o.getStyleList()) {
 				System.out.print(s.getName() + "\t" + s.getPrice() + "원");

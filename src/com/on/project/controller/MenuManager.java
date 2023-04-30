@@ -81,7 +81,6 @@ public class MenuManager {
 	}
 	
 	public ArrayList<ProductDTO> randomDesignProductList() {
-		System.out.println(productData.getName());
 
 		int createNum = 3; // 추천디자인 생성 개수
 		int optionListSize = productData.getOptionList().size();

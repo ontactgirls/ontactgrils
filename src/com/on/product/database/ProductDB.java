@@ -1,21 +1,22 @@
-package com.on.project.database;
+package com.on.product.database;
 
 import java.util.ArrayList;
 
-import com.on.project.dto.OptionDTO;
-import com.on.project.dto.ProductDTO;
-import com.on.project.dto.StyleDTO;
+import com.on.product.dto.OptionDTO;
+import com.on.product.dto.ProductDTO;
+import com.on.product.dto.StyleDTO;
 
 
 public class ProductDB {
 	
-	private ArrayList<ProductDTO> productList = new ArrayList<>();
+	private ArrayList<ProductDTO> productList;
 
 	public ProductDB() { // 기본생성자 시작
 		
 		ProductDTO product;
 		OptionDTO option;
 		StyleDTO style;
+		productList = new ArrayList<>();
 		
 		// [제품] 0 : 셔츠
 		productList.add(new ProductDTO());
@@ -99,6 +100,48 @@ public class ProductDB {
 				style.setName("긴바지");
 				style.setPrice(4000);
 				
+		// [제품] 2 : 티셔츠
+		productList.add(new ProductDTO());
+		product = productList.get(productList.size()-1); // new ProductDTO()의 인스턴스 주소값
+		product.setName("티셔츠"); // ProductDTO()의 필드변수에 값을 할당한다.
+		
+			// [옵션] 0 : 넓이
+			product.getOptionList().add(new OptionDTO()); 
+			option = product.getOptionList().get(product.getOptionList().size()-1); // new OptionDTO()의 인스턴스 주소값
+			option.setName("원단두께"); // OptionDTO 의 필드에 값을 할당한다.
+			
+				// [옵션의 스타일] 0 : 넓게  1 : 좁게
+				option.getStyleList().add(new StyleDTO()); 
+				style = option.getStyleList().get(option.getStyleList().size()-1); // new StyleDTO()의 인스턴스 주소값
+				style.setName("얇음"); // StyleDTO 의 필드에 값을 할당한다.
+				style.setPrice(1500);
+				
+				option.getStyleList().add(new StyleDTO());
+				style = option.getStyleList().get(option.getStyleList().size()-1);
+				style.setName("두꺼움");
+				style.setPrice(2000);
+
+			// [옵션] 1 : 기장
+			product.getOptionList().add(new OptionDTO()); 
+			option = product.getOptionList().get(product.getOptionList().size()-1); // new OptionDTO()의 인스턴스 주소값
+			option.setName("기장"); // OptionDTO 의 필드에 값을 할당한다.
+			
+				// [옵션의 스타일] 0 : 넓게  1 : 좁게
+				option.getStyleList().add(new StyleDTO()); 
+				style = option.getStyleList().get(option.getStyleList().size()-1); // new StyleDTO()의 인스턴스 주소값
+				style.setName("짧게"); // StyleDTO 의 필드에 값을 할당한다.
+				style.setPrice(2000);
+				
+				option.getStyleList().add(new StyleDTO());
+				style = option.getStyleList().get(option.getStyleList().size()-1);
+				style.setName("보통");
+				style.setPrice(3000);
+				
+				option.getStyleList().add(new StyleDTO());
+				style = option.getStyleList().get(option.getStyleList().size()-1);
+				style.setName("길게");
+				style.setPrice(4000);
+		
 				
 
 		// 사용자에게 입력받아서 특정한 값에 접근하다고 가정하고 테스트

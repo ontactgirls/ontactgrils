@@ -3,22 +3,20 @@ package com.on.project.view;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.on.product.database.ProductDB;
+import com.on.product.dto.OptionDTO;
+import com.on.product.dto.ProductDTO;
+import com.on.product.dto.StyleDTO;
 import com.on.project.controller.MenuManager;
-import com.on.project.database.ProductDB;
-import com.on.project.dto.OptionDTO;
-import com.on.project.dto.ProductDTO;
-import com.on.project.dto.StyleDTO;
 
 public class Menu {
 	Scanner sc = new Scanner(System.in);
-	ProductDB db = new ProductDB();
 	MenuManager mm = new MenuManager();
-	Menu m;
-	ProductDTO productData;
+	ProductDB db = new ProductDB();
+	
 	String errMsg = "없는 메뉴 입니다.";
 	
-	public void mainMenu(Menu m) {
-		this.m = m;
+	public void mainMenu() {
 		String[] texts = 
 			{
 					"1. 관리자",
@@ -59,8 +57,6 @@ public class Menu {
 	
 	private void clientMenu() {
 
-		// 존재하는 모든 제품을 사용자에게 메뉴로 보여준다.
-
 		int click = 0;
 		int seq = 0;
 
@@ -81,17 +77,19 @@ public class Menu {
 			}
 		}
 		
-		productData = db.getProductList().get(click-1);
-
-		m.designSelectMenu(productData);
+		mm.setProductData(db.getProductList().get(click-1));
+		
+		designSelectMenu();
+		
+		System.out.println("clientMenu 종료");
 
 	} // clientMenu()
 	
 	
-	private void designSelectMenu(ProductDTO productData) {
+	private void designSelectMenu() {
 		
 		int click = 0;
-		ArrayList<ProductDTO> productList = mm.randomDesignProductList(productData);
+		ArrayList<ProductDTO> productList = mm.randomDesignProductList();
 		
 		while(true) {
 			int seq = 0;
@@ -118,11 +116,11 @@ public class Menu {
 			case 2 :
 			case 3 :
 				
-				m.orderPageMenu(productList.get(click-1));
+				orderPageMenu(productList.get(click-1));
 				productList = null;
 				break;
 			case 4 : 
-				m.customPageMenu(null);
+				customOptionMenu(null);
 
 		}
 		
@@ -130,7 +128,7 @@ public class Menu {
 	} // designSelectMenu()
 	
 	private void orderPageMenu(ProductDTO product) {
-		System.out.println("아래 디자인으로 주문하시겠습니까?");
+		System.out.println("아래 디자인으로 (" + product.getName() + ") 제품을 주문하시겠습니까?");
 		System.out.print("\t");
 		mm.printDesign(product.getOptionList());
 		
@@ -140,6 +138,7 @@ public class Menu {
 			click = 0;
 			System.out.println("\t" + ++seq + ". 주문하기");
 			System.out.println("\t" + ++seq + ". 디자인 수정 하기");
+			System.out.println("\t" + ++seq + ". 프로그램 종료 하기");
 			
 			System.out.print("메뉴를 선택해주세요 : ");
 			click = sc.nextInt();
@@ -154,25 +153,33 @@ public class Menu {
 		switch(click) {
 			case 1:
 				System.out.println("주문해주셔서 감사합니다.");
+				
+				 
 				break;
 			case 2:
-				m.customPageMenu(product);
-			
+				customOptionMenu(product);
+				break;
+			case 3:
+				return;
 		}
 	} // orderPageMenu()
 	
-	private void customPageMenu(ProductDTO product) {
+	
+//	private void inputOrde
+	
+	
+	private void customOptionMenu(ProductDTO product) {
 		if(product == null) {
-			product = mm.getProductStructure(productData);
+			product = mm.getProductStructure();
 //			System.out.println(product);
 			
 			System.out.println(product.getName() + " 제품 커스텀 하기");
 			
 			for(int i = 0; i < product.getOptionList().size(); i++) {
-				customOptionStyle(product, i);
+				customStyleMenu(product, i);
 			}
 //			System.out.println(product);
-			m.orderPageMenu(product);
+			
 		} else {
 			while(true) {
 				System.out.println(product.getName() + " 제품의 디자인 정보");
@@ -182,9 +189,9 @@ public class Menu {
 				int click = 0;
 				while(true) {
 					click = -1;
-					System.out.println("옵션 리스트(수정을 종료하려면 0번을 입력하세요)");
+					System.out.println("옵션 리스트\n(수정을 종료하려면 0번을 입력하세요)");
 					int seq = 0;
-					for(OptionDTO o : productData.getOptionList()) {
+					for(OptionDTO o : mm.getProductData().getOptionList()) {
 						System.out.println("\t" + ++seq + ". " + o.getName());
 					}
 
@@ -200,19 +207,23 @@ public class Menu {
 				if(click == 0) {
 					break;
 				}
-				
-				m.customOptionStyle(product, click-1);
+
+				customStyleMenu(product, click-1);
 				
 				System.out.println("수정되었습니다.");
 				
 			} // while
 			
-			orderPageMenu(product);
 		}
+		
+		orderPageMenu(product);
+
 	}
 	
-	private void customOptionStyle(ProductDTO product, int index) {
-		OptionDTO optionData = productData.getOptionList().get(index);
+	private void customStyleMenu(ProductDTO product, int optionId) {
+		
+		OptionDTO optionData = mm.getProductData().getOptionList().get(optionId);
+		
 		int click = 0;
 		while(true) {
 			click = 0;
@@ -230,10 +241,7 @@ public class Menu {
 				System.out.println(errMsg);
 			}
 		}
-		String styleName = optionData.getStyleList().get(click-1).getName();
-		int stylePrice = optionData.getStyleList().get(click-1).getPrice();
-		product.getOptionList().get(index).getStyleList().get(0).setName(styleName);
-		product.getOptionList().get(index).getStyleList().get(0).setPrice(stylePrice);
 
+		mm.modifyStyle(product, optionId, click-1);
 	}
 }

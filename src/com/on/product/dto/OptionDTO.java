@@ -1,4 +1,4 @@
-package com.on.project.dto;
+package com.on.product.dto;
 
 import java.util.ArrayList;
 

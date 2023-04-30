@@ -2,17 +2,17 @@ package com.on.project.controller;
 
 import java.util.ArrayList;
 
-import com.on.project.dto.OptionDTO;
-import com.on.project.dto.ProductDTO;
-import com.on.project.dto.StyleDTO;
+import com.on.product.dto.OptionDTO;
+import com.on.product.dto.ProductDTO;
+import com.on.product.dto.StyleDTO;
 
 public class MenuManager {
 	
-	public ArrayList<ProductDTO> randomDesignProductList(ProductDTO productData) {
+	ProductDTO productData;
+	
+	public ArrayList<ProductDTO> randomDesignProductList() {
 		System.out.println(productData.getName());
-		
-		
-		MenuManager tm = new MenuManager();
+
 		int createNum = 3; // 추천디자인 생성 개수
 		int optionListSize = productData.getOptionList().size();
 		
@@ -20,14 +20,13 @@ public class MenuManager {
 		ArrayList<ProductDTO> randomDesignProductList = new ArrayList<>();
 		// 추천 디자인을 담기 위한 틀 생성
 		while(true) {
-			ProductDTO productStructure = tm.getProductStructure(productData);
+			ProductDTO productStructure = getProductStructure();
 			randomDesignProductList.add(productStructure);
 			
 			if(randomDesignProductList.size() == createNum) {
 				break;
 			}
 		}
-		tm = null;
 		
 //		for(ProductDTO p : randomDesignProductList) {
 //			System.out.println(p);
@@ -108,7 +107,7 @@ public class MenuManager {
 	
 	
 	
-	public ProductDTO getProductStructure(ProductDTO productData) {
+	public ProductDTO getProductStructure() {
 		
 //		style의 값은 제외하고 아래의 구조로 틀만 만들어진다.
 //		style의 값은 랜덤, 또는 사용자가 선택한 값으로 할당되고 수정될 값이다.
@@ -147,5 +146,28 @@ public class MenuManager {
 		}
 		System.out.println();
 	}
+	
+	public void modifyStyle(ProductDTO product, int optionId, int styleId) {
+		OptionDTO optionData = productData.getOptionList().get(optionId);
+		OptionDTO option = product.getOptionList().get(optionId);
+		
+		String styleName = optionData.getStyleList().get(styleId).getName();
+		int stylePrice = optionData.getStyleList().get(styleId).getPrice();
+
+		option.getStyleList().get(0).setName(styleName);
+		option.getStyleList().get(0).setPrice(stylePrice);
+
+	}
+
+
+	public ProductDTO getProductData() {
+		return productData;
+	}
+
+	public void setProductData(ProductDTO productData) {
+		this.productData = productData;
+	}
+	
+	
 	
 } // class

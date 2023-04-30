@@ -7,5 +7,7 @@ public class Run {
 	public static void main(String[] args) {
 		Menu m = new Menu();
 		m.mainMenu();
+		
+		System.out.println("종료되었습니다.");
 	}
 }

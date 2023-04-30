@@ -175,6 +175,30 @@ public class ProductDB {
 	} // 기본생성자 끝
 
 	
+	
+	
+	@Override
+	public String toString() {
+		
+		for(ProductDTO p : productList) {
+			System.out.println("제품 : " + p.getName());
+			
+			for(OptionDTO o : p.getOptionList()) {
+				System.out.println("  ㄴ옵션 : " + o.getName());
+				
+					for(StyleDTO s : o.getStyleList()) {
+						System.out.println("    ㄴ스타일 : " + s.getName());
+						System.out.println("    ㄴ스타일가격 : " + s.getPrice());
+					}
+			}
+		}
+
+		return "";
+	}
+
+
+
+
 	// getter / setter
 	public ArrayList<ProductDTO> getProductList() {
 		return productList;

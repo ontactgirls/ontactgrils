@@ -2,13 +2,73 @@ package com.on.project.controller;
 
 import java.util.ArrayList;
 
+import com.on.product.database.ProductDB;
 import com.on.product.dto.OptionDTO;
 import com.on.product.dto.ProductDTO;
 import com.on.product.dto.StyleDTO;
+import com.on.project.dto.OrderDTO;
 
 public class MenuManager {
 	
-	ProductDTO productData;
+	private ProductDTO productData;
+	private ArrayList<OrderDTO> orderList;
+	private ProductDB db = new ProductDB();
+
+
+	public ProductDTO addInDB(String name) {
+		ProductDTO np = new ProductDTO();
+		
+		for(ProductDTO p : db.getProductList()) {
+			if (name.equals(p.getName())) {
+				np = null;
+			}
+		}
+		
+		if(np != null) {
+			np.setName(name);
+			db.getProductList().add(np);
+		}
+
+		return np;
+	}
+	
+	public OptionDTO addInDB(ProductDTO np, String name) {
+		OptionDTO no = new OptionDTO();
+		
+		for(OptionDTO o : np.getOptionList()) {
+			if(name.equals(o.getName())) {
+				no = null;
+			}
+		}
+		
+		if(no != null) {
+			no.setName(name);
+			np.getOptionList().add(no);
+		}
+		return no;
+	}
+	
+	public StyleDTO addInDB(OptionDTO no, String name, int price) {
+		StyleDTO ns = new StyleDTO();
+		
+		for(StyleDTO s : no.getStyleList()) {
+			if(name.equals(s.getName())) {
+				ns = null;
+			}
+		}
+		
+		if(ns != null) {
+			ns.setName(name);
+			ns.setPrice(price);
+			no.getStyleList().add(ns);
+		}
+		return ns;
+	}
+	
+	public void addOrderList(OrderDTO orderInfo) {
+		orderList = new ArrayList<>();
+		orderList.add(orderInfo);
+	}
 	
 	public ArrayList<ProductDTO> randomDesignProductList() {
 		System.out.println(productData.getName());
@@ -167,7 +227,16 @@ public class MenuManager {
 	public void setProductData(ProductDTO productData) {
 		this.productData = productData;
 	}
-	
-	
-	
+
+	public ArrayList<OrderDTO> getOrderList() {
+		return orderList;
+	}
+
+
+	public ProductDB getDB() {
+		return db;
+	}
+
+
+
 } // class

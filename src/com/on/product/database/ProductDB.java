@@ -144,17 +144,17 @@ public class ProductDB {
 		
 				
 
-		// 사용자에게 입력받아서 특정한 값에 접근하다고 가정하고 테스트
-		int productID = 1;
-		int titleID = 0;
-		int designID = 0;
+//		사용자에게 입력받아서 특정한 값에 접근하다고 가정하고 테스트
+//		int productID = 1;
+//		int titleID = 0;
+//		int designID = 0;
 		
 //		System.out.println("productList.get(productID)" + productList.get(productID));
 //		System.out.println(productList.get(productID).getTitleList().get(titleID).getDesignList().get(designID).getName());
 //		System.out.println(productList.get(productID).getTitleList().get(titleID).getDesignList().get(designID).getPrice());
 		
 		
-//		// 사용자에게 입력받아서 특정한 값을 추가한다고 가정하고 테스트
+//		사용자에게 입력받아서 특정한 값을 추가한다고 가정하고 테스트
 //		
 //		productID = 0;
 //		titleID = 0;
@@ -184,12 +184,13 @@ public class ProductDB {
 			System.out.println("제품 : " + p.getName());
 			
 			for(OptionDTO o : p.getOptionList()) {
-				System.out.println("  ㄴ옵션 : " + o.getName());
+				System.out.println("  ㄴ " + o.getName());
+				System.out.print("      ㄴ ");
 				
-					for(StyleDTO s : o.getStyleList()) {
-						System.out.println("    ㄴ스타일 : " + s.getName());
-						System.out.println("    ㄴ스타일가격 : " + s.getPrice());
-					}
+				for(StyleDTO s : o.getStyleList()) {
+					System.out.print(s.getName() + " : " + s.getPrice() + "원\t");
+				}
+				System.out.println();
 			}
 		}
 

@@ -11,10 +11,21 @@ import com.on.project.dto.OrderDTO;
 public class MenuManager {
 	
 	private ProductDTO productData;
-	private ArrayList<OrderDTO> orderList;
+	private ArrayList<OrderDTO> orderList = new ArrayList<>();
 	private ProductDB db = new ProductDB();
 
-
+	
+	public void deleteInDB(int id) {
+		db.getProductList().remove(id);
+	}
+	
+	public void deleteInDB(ProductDTO p, int id) {
+		p.getOptionList().remove(id);
+	}
+	public void deleteInDB(OptionDTO o, int id) {
+		o.getStyleList().remove(id);
+	}
+	
 	public ProductDTO addInDB(String name) {
 		ProductDTO np = new ProductDTO();
 		
@@ -66,7 +77,6 @@ public class MenuManager {
 	}
 	
 	public void addOrderList(OrderDTO orderInfo) {
-		orderList = new ArrayList<>();
 		orderList.add(orderInfo);
 	}
 	

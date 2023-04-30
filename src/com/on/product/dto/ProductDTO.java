@@ -1,5 +1,6 @@
 package com.on.product.dto;
 
+
 import java.util.ArrayList;
 
 public class ProductDTO {
@@ -19,28 +20,24 @@ public class ProductDTO {
 	
 	@Override
 	public String toString() {
-		
 
-		
-//		int i = 0;
-//		for(OptionDTO o : optionList) {
-//			System.out.print(o.getName() + " : ");
-//			
-//			for(StyleDTO s : o.getStyleList()) {
-//				System.out.print(s.getName() + "\t");
-//			}
-//			
-//			i++;
-//			
-//			if(i % 3 == 0) {
-//				System.out.println();
-//			}
-//		}
-//				
+		int i = 0;
+		for(OptionDTO o : optionList) {
+			System.out.print("\t" + o.getName() + " : ");
+			
+			for(StyleDTO s : o.getStyleList()) {
+				System.out.print(s.getName() + "\t" + s.getPrice() + "원");
+			}
+			
+			i++;
+			
+			if(i % 3 == 0) {
+				System.out.println();
+			}
+		}
+				
 		return "";
 		
-//		return "ProductDTO [name=" + name + ", optionList=" + optionList + "]";
 	}
-	
 
 }

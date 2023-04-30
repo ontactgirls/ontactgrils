@@ -8,6 +8,7 @@ public class OrderDTO {
 	private String address; // 배송받을 주소
 	private ProductDTO product; // 고객이 주문한 제품 정보
 	private int sum; // 주문한 제품 가격
+	private String orderDate; // 주문일자
 	
 	// 매개변수 생성자
 	public OrderDTO(String name, String phone, String address) {
@@ -15,6 +16,23 @@ public class OrderDTO {
 		this.phone = phone;
 		this.address = address;
 	}
+
+	
+	
+	
+	@Override
+	public String toString() {
+		System.out.println("이름 : " + name + ", 핸드폰 : " + phone + ", 주문일자 : " + orderDate);
+		System.out.println("제품명 : " + product.getName() + ", 제품가격 : " + sum);
+		System.out.println("배송주소 : " + address); 
+		System.out.println("\t[" + product.getName() + " 디자인 정보 ] ");
+		System.out.println(product);
+		System.out.println("--------------------------------------------------------------");
+		return "";
+	}
+
+
+
 
 	public String getName() {
 		return name;
@@ -56,6 +74,12 @@ public class OrderDTO {
 		this.sum = sum;
 	}
 
-	
+	public String getOrderDate() {
+		return orderDate;
+	}
+
+	public void setOrderDate(String orderDate) {
+		this.orderDate = orderDate;
+	}
 
 }

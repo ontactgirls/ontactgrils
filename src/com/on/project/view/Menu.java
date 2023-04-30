@@ -21,8 +21,8 @@ public class Menu {
 		while(true) {
 			String[] texts = 
 				{
-						"1. 관리자"
-				      , "2. 고객-맞춤제작"
+						"1. 관리자메뉴"
+				      , "2. 맞춤제작하기"
 					  , "3. 프로그램 종료"
 				};
 			int click = 0;
@@ -58,41 +58,79 @@ public class Menu {
 	} // mainMenu()
 	
 	private void adminMenu() {
-		
+		String[] texts = 
+			{
+					"1. 주문 현황 보기"
+				  , "2, 전체 제품 정보 보기"
+				  ,	"3, 제품 추가"
+			      , "4. 옵션 추가"
+				  , "5, 스타일 추가"
+				  , "6. 제품 삭제"
+				  , "7. 옵션 삭제"
+				  , "8. 스타일 삭제"
+
+			};
 		int click = 0;
 		while(true) {
-			System.out.println("1. 제품 추가하기");
-			System.out.println("2. 옵션 추가하기");
-			System.out.println("3. 스타일 추가하기");
-			System.out.println("4. 주문현황보기");
+
+			for(String text : texts) {
+				System.out.println(text);
+			}
 			
 			System.out.print("메뉴를 선택하세요 : ");
 			click = sc.nextInt();
 			
-			if(click > 0 && click <= 4) {
+			if(click > 0 && click <= texts.length) {
 				break;
 			} else {
 				System.out.println(errMsg);
 			}
 		}
 		sc.nextLine();
+		
+		OptionDTO optionData;
 		switch(click) {
-			case 1: //제품추가
+			case 1: // 주문현황
+				if (mm.getOrderList() == null) {
+					System.out.println("주문 목록이 없습니다.");					
+				} else {
+					System.out.println("--------------------------------------------------------------");
+					for(OrderDTO order : mm.getOrderList()) {
+						order.toString();
+					}
+				}
+				break;
+
+			case 2: // 전체 제품 보기
+				System.out.println(mm.getDB());
+				break;
+			case 3: // 제품추가
 				addProductInput();
 				break;
-			case 2: //옵션추가
+			case 4: // 옵션추가
 				addOptionInput(mm.getDB().getProductList().get(clickProduct()));
 				break;
-			case 3: //스타일추가
+			case 5: // 스타일추가
 				mm.setProductData(mm.getDB().getProductList().get(clickProduct()));
-				OptionDTO o = mm.getProductData().getOptionList().get(clickOption()); 
-				addStyleInput(o);
-				
-			case 4:
+				optionData = mm.getProductData().getOptionList().get(clickOption()); 
+				addStyleInput(optionData);
 				break;
-		}
-		System.out.println();
-		System.out.println(mm.getDB());
+			case 6: // 제품삭제
+				mm.deleteInDB(clickProduct());
+				break;
+			case 7: // 옵션삭제
+				
+				mm.setProductData(mm.getDB().getProductList().get(clickProduct()));
+				mm.deleteInDB(mm.getProductData(), clickOption());
+				break;
+			case 8: // 스타일삭제
+				mm.setProductData(mm.getDB().getProductList().get(clickProduct()));
+				optionData = mm.getProductData().getOptionList().get(clickOption());
+				mm.deleteInDB(optionData, clickStyle(optionData));
+				break;
+		} // switch
+		
+
 	} // adminMenu()
 	
 	private void addProductInput() {
@@ -136,12 +174,8 @@ public class Menu {
 				}
 			}
 
-			while(click < 1 || click > 2) {
-				System.out.println("1. 옵션 계속 추가");
-				System.out.println("2. 종료하기");
-				System.out.print("메뉴를 선택하세요 : ");
-				click = sc.nextInt();
-			}
+			System.out.print("0. 종료하기 / 1. 옵션 계속 추가 : ");
+			click = sc.nextInt();
 			sc.nextLine();
 		}
 	}
@@ -176,13 +210,9 @@ public class Menu {
 				}
 			}
 			
-			while(click < 1 || click > 2) {
-				System.out.println("1. 스타일 계속 추가");
-				System.out.println("2. 종료하기");
-				System.out.print("메뉴를 선택하세요 : ");
-				click = sc.nextInt();
-				sc.nextLine();
-			}
+			System.out.print("0. 종료하기 / 1. 스타일 계속 추가 : ");
+			click = sc.nextInt();
+			sc.nextLine();
 		}
 	}
 	
@@ -272,20 +302,17 @@ public class Menu {
 		
 		switch(click) {
 			case 1:
+				Calendar cal = Calendar.getInstance();
 				OrderDTO orderInfo = orderInput();
 				orderInfo.setProduct(product);
 				orderInfo.setSum(sum);
-				
+				orderInfo.setOrderDate(new SimpleDateFormat("yyyy-MM-dd").format(cal.getTime()));
 				mm.addOrderList(orderInfo);
-				
-				Calendar cal = Calendar.getInstance();
 				cal.add(cal.DATE, 7);
-				
 				System.out.print("주문하신 제품은 ");
 				System.out.print(new SimpleDateFormat("yyyy-MM-dd").format(cal.getTime()));
 				System.out.println(" 에 배송될 예정입니다.");
 				System.out.println("주문해주셔서 감사합니다.");
-
 				break;
 			case 2:
 				customOptionMenu(product);
@@ -359,7 +386,7 @@ public class Menu {
 				customStyleMenu(product, clickOption());
 				System.out.println("수정되었습니다.");
 				
-				System.out.print("1. 수정 계속 / 2. 수정 종료 : ");
+				System.out.print("0. 수정 종료 / 1. 수정 계속 : ");
 				click = sc.nextInt();
 				sc.nextLine();
 			}
@@ -372,26 +399,8 @@ public class Menu {
 	private void customStyleMenu(ProductDTO product, int optionId) {
 		
 		OptionDTO optionData = mm.getProductData().getOptionList().get(optionId);
-		
-		int click = 0;
-		while(true) {
-			click = 0;
-			System.out.println(optionData.getName() + " 옵션의 스타일 리스트");
-			int seq = 0;
-			for(StyleDTO s : optionData.getStyleList()) {
-				System.out.println("\t" + ++seq + ". " + s.getName());
-			}
-			System.out.print("스타일을 선택하세요 : ");
-			click = sc.nextInt();
-			
-			if(click > 0 && click <= seq) {
-				break;
-			} else {
-				System.out.println(errMsg);
-			}
-		}
-
-		mm.modifyStyle(product, optionId, click-1);
+		System.out.println(optionData.getName() + " 옵션의 스타일 리스트");
+		mm.modifyStyle(product, optionId, clickStyle(optionData));
 	}
 	
 	private int clickProduct() {
@@ -430,6 +439,27 @@ public class Menu {
 			click = sc.nextInt();
 			sc.nextLine();
 			
+			if(click > 0 && click <= seq) {
+				break;
+			} else {
+				System.out.println(errMsg);
+			}
+		}
+		return click-1;
+	}
+	
+	
+	private int clickStyle(OptionDTO optionData) {
+		int click = 0;
+		while(true) {
+			click = 0;
+			int seq = 0;
+			for(StyleDTO s : optionData.getStyleList()) {
+				System.out.println("\t" + ++seq + ". " + s.getName());
+			}
+			System.out.print("스타일을 선택하세요 : ");
+			click = sc.nextInt();
+			sc.nextLine();
 			if(click > 0 && click <= seq) {
 				break;
 			} else {

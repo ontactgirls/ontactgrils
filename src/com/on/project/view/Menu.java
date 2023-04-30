@@ -295,7 +295,6 @@ public class Menu {
 			int seq = 0;
 			for(ProductDTO p : productList) {
 				System.out.println("\t\t" + ++seq + ". 추천디자인 선택하기");
-				System.out.print("\t\t\t");
 				mm.printDesign(p.getOptionList());
 				System.out.println("");
 			}
@@ -343,7 +342,7 @@ public class Menu {
 			click = 0;
 			int seq = 0;
 			System.out.println("\n\t\t아래 디자인으로 (" + product.getName() + ") 제품을 주문하시겠습니까?");
-			System.out.print("\n\t\t");
+			System.out.println();
 			mm.printDesign(product.getOptionList());
 			
 			System.out.println("\t\t제품의 가격은 " + sum + "원 입니다.\n");
@@ -468,7 +467,6 @@ public class Menu {
 			int click = 1;
 			while(click == 1) {
 				System.out.println("\t\t" + product.getName() + " 제품의 디자인 정보");
-				System.out.print("\t\t");
 				mm.printDesign(product.getOptionList());
 				System.out.println();
 				System.out.println("\t\t옵션 리스트");

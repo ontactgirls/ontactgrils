@@ -202,10 +202,10 @@ public class MenuManager {
 	public void printDesign(ArrayList<OptionDTO> optionList) {
 		int i = 0;
 		for(OptionDTO o : optionList) {
-			System.out.print(o.getName() + " : ");
+			System.out.print("\t\t" + o.getName() + " : ");
 			
 			for(StyleDTO s : o.getStyleList()) {
-				System.out.print(s.getName() + "\t");
+				System.out.print(s.getName());
 			}
 			i++;
 			
